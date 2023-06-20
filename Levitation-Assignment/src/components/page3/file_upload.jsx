@@ -1,42 +1,41 @@
 import { useState } from "react";
-import './user_details.css'
 import '../multi_fun_page.css'
 import '../login.css'
+import propTypes from 'prop-types'
 
- export function FileUpload() {
+
+ export function FileUpload(props) {
 
 	const [uploadedFile, setUploadedFile] = useState()
-    // const [fileLimit, setFileLimit] = useState(false);
 
-
-
-    const handleUploadFiles = file => {
-        const uploaded = [...uploadedFile];
-        let limitExceeded = false;
-        uploaded.push(file);
-        if (!limitExceeded) setUploadedFile(uploaded)
-        
-
+    const handleUploadFile = f => {
+            setUploadedFile(f)
+            console.log(f)
+            props.setData({...props.data,file:f})
+            console.log(props.data)
     }
 
     const handleFileEvent =  (e) => {
-        const chosenFiles = Array.prototype.slice.call(e.target.files)
-        handleUploadFiles(chosenFiles);
+        const chosenFile = e.target.files
+        handleUploadFile(chosenFile);
     }
 
     return (
-		<div className="upload-file">
+		<>
+            <div className="upload-file">
 
-			<input id='fileUpload' type='file'
-					accept='application/pdf, image/png'
+            <input id='fileUpload' type='file'
+                    accept='application/pdf, image/png'
                     onChange={handleFileEvent}
                     
-			/>
+            />
 
-			<div className="uploaded-files-list">
-                {uploadedFile}
-			</div>
-
-		</div>
+            </div>
+        </>
 	);
 }
+
+FileUpload.propTypes = {
+    data : propTypes.object,
+    setData : propTypes.func
+  }

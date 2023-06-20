@@ -1,7 +1,5 @@
 import { useState , useEffect} from "react"
 import './multi_fun_page.css'
-import './page3/user_details.css'
-import './login.css'
 
 import { UserDetails } from "./page3/user_details"
 import { UserAddress } from "./page3/user_address"
@@ -15,116 +13,120 @@ import { GeoLocation } from "./page3/geoLocation"
 
 function ProgressBar1() {
   
+    const [data,setData] = useState({
+        username : "",
+        email : "",
+        phoneNum : "+91",
+        address1 : "",
+        address2 : "",
+        city : "",
+        state : "",
+        pincode : "",
+        country : "",
+        file : "",
+        files : "",
+        location : "",
+    })
     const [progress,setProgress] = useState(0)
-    const [page,setPage] = useState(<UserDetails/>)
-    const [count,setCount] = useState(0)
+    const [page,setPage] = useState(0)
+    const [but,setBut] = useState("Next")
+    const FormPages = ["User Info", "User Address", "File Upload1","File Upload2","Geo Location"];
 
-    const SubmitHandler = () => {
+   
+   
+
+
+    const pageHandler = () => {
         
-        return true
-
-    }
-
-    const progressHandler = () => {
-        if(progress<100)
-        {
-            setProgress(progress+20)
-            setCount(count+1)
+            
+            
             // console.log("User details" + inputData)
             
-            if(count===0)
+            
+            if(page===0)
             {
-                setPage(<UserAddress/>)
+                 return <UserDetails data={data} setData={setData} />
+                // return <div>Hello</div>
             }
-            else if(count===1)
+            else if(page===1)
             {
-                setPage(<FileUpload/>)
+                return <UserAddress data={data} setData={setData}/>
             }
-            else if(count===2)
+            else if(page===2)
             {
-                setPage(<MultiFileUpload/>)
+                return <FileUpload data={data} setData={setData}/>
             }
-            else if(count===3)
+            else if(page===3)
             {
-                setPage(<GeoLocation/>)
+                return (<MultiFileUpload data={data} setData={setData}/>)
             }
-        }
+            else if(page===4)
+            {
+                return (<GeoLocation data={data} setData={setData}/>)
+            }
+        
 
-        if(progress>=80)
-        {
-            setBut("Submit")
-            if(SubmitHandler())
-            {
-                console.log("Great Job")
-            }
-        }
-        else{
-            setBut("Next")
-        }
+       
     }
 
-    const previousHandler = () => {
-
-        if(progress>0)
-        {
-            setProgress(progress-20)
-            setCount(count-1)
-            console.log("count : "+count)
-
-            if(count===4)
-            {
-                setPage(<MultiFileUpload/>)
-            }
-            else if(count===3)
-            {
-                setPage(<FileUpload/>)
-            }
-            else if(count===2)
-            {
-                setPage(<UserAddress/>)
-            }
-            else if(count===1)
-            {
-                setPage(<UserDetails/>)
-            }
-        }
-        if(progress===100)
-        {
-            setBut("Next")
-        }
+    const submitHandler = () => {
+        
     }
 
-    
-    const [but,setBut] = useState("Next")
 
 
     return (
                
         
-            <div className="con">
-                <div className="container">
+            
+                <div className="con">
+                    <div className="container">
 
-                    <div className="progress-bar">
-                        <div className="progress-fill" style={{width:`${progress}%`,backgroundColor:"rgb(79, 195, 241)"}}></div>
-                    </div>
+                        <div className="progress-bar">
+                            <div className="progress-fill" style={{width:`${progress}%`,backgroundColor:"rgb(79, 195, 241)"}}></div>
+                        </div>
 
-                    <div className="progress-label">{progress}%</div>
-                
-                            <div className="pages">
-                                <h3>Fill the form</h3>
-                                {page}
-                            </div>
+                        <div className="progress-label">{progress}%</div>
+                    
+                                <div className="pages">
+                                    <h3>Fill the form</h3>
+                                    {pageHandler()}
+                                </div>
+                            
+
+                        <div >
+                            <button className="buttons" id="previous" disabled={page == 0} onClick={() => { 
+                                                                                                if(progress<=100)
+                                                                                                {
+                                                                                                    setBut("Next")
+                                                                                                }
+                                                                                                setPage(page-1);
+                                                                                                setProgress(progress-20)
+                                                                                            }}>Previous</button>
+
+                            <button className="buttons" id="next" onClick={() => {
+                                                                                    if (page === FormPages.length-1) {
+                                                                                        setBut("Submit");
+                                                                                        if(progress<100)
+                                                                                        {
+                                                                                            setProgress(progress+20)
+                                                                                        }
+                                                                                        if(progress==100)
+                                                                                        {
+                                                                                            submitHandler();
+                                                                                        }
+
+                                                                                    } else {
+                                                                                            setPage(page+1);
+                                                                                            setProgress(progress+20)
+                                                                                    }}}>{but}</button>
+                        </div>
+                        
                         
 
-                    <div >
-                        <button className="buttons" id="previous" onClick={previousHandler}>Previous</button>
-                        <button className="buttons" id="next" onClick={progressHandler}>{but}</button>
                     </div>
-                    
-                    
-
                 </div>
-            </div>
+            
         
     )
   }

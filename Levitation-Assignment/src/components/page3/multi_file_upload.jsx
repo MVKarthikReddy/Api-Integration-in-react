@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import propTypes from 'prop-types'
+
 
 const MAX_COUNT = 5;
 
-export function MultiFileUpload() {
+export function MultiFileUpload(props) {
 
 	const [uploadedFiles, setUploadedFiles] = useState([])
     const [fileLimit, setFileLimit] = useState(false);
@@ -27,6 +29,8 @@ export function MultiFileUpload() {
         {
             console.log(uploaded)
             setUploadedFiles(uploaded)
+            props.setData({...props.data,files:uploaded})
+            // console.log(props.data)
         }
 
     }
@@ -59,3 +63,7 @@ export function MultiFileUpload() {
 	);
 }
 
+MultiFileUpload.propTypes = {
+    data : propTypes.object,
+    setData : propTypes.func
+  }

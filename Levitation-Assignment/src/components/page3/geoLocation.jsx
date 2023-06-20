@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react";
-export function GeoLocation() {
+import propTypes from 'prop-types'
+export function GeoLocation(props) {
   const [currLocationJs, setCurrLocationJs] = useState({});
   useEffect(() => {
     getLocationJs();
@@ -11,6 +12,7 @@ export function GeoLocation() {
       console.log(position);
       const { latitude, longitude } = position.coords;
       setCurrLocationJs({ latitude, longitude });
+      props.setData({...props.data,location:{latitude,longitude}})
       
     });
   };
@@ -24,5 +26,10 @@ export function GeoLocation() {
       </div>
     </div>
   );
+}
+
+GeoLocation.propTypes = {
+  data : propTypes.object,
+  setData : propTypes.func
 }
 
