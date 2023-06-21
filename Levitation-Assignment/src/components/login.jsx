@@ -30,9 +30,10 @@ const Login = () => {
     const handleLogin = (e) => {
 
         e.preventDefault()
+        let d = {username,password}
         if(validate()){
             console.log(data.username)
-            fetch("http://localhost:3000/user/"+username).then((res) => {
+            fetch("http://localhost:3000/admin/"+username).then((res) => {
                 return res.json();
             }).then((resp) => {
                 console.log(resp)

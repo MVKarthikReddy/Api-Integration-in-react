@@ -74,9 +74,9 @@ function ProgressBar1() {
         return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(data.email)
     }
 
-    const submitHandler = () => {
+    const submitHandler = async () => {
 
-            
+            console.log(data);
             if(!isValidName(data.username))
             {
                 alert('enter valid username')
@@ -95,6 +95,18 @@ function ProgressBar1() {
             }
             else{
                 console.log(data)
+                let d = data
+                let result = await fetch("http://localhost:3000/users/",
+                                    {
+                                        method : 'POST',
+                                        headers : {
+                                            "Content-Type" : "application/json",
+                                            "Accept" : "application/json"
+                                        },
+                                        body : JSON.stringify(data)
+                                    })
+                result = await result.json()
+                console.log(result)
             }
 
     }
@@ -130,7 +142,7 @@ function ProgressBar1() {
                             <button className="buttons" id="next"  onClick={() => {
                                                                                     if (page === FormPages.length - 1) {
                                                                                         submitHandler()
-                                                                                        console.log(data);
+                                                                                        
                                                                                     } else {
                                                                                         setPage((currPage) => currPage + 1);
                                                                                     }
