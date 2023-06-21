@@ -6,6 +6,7 @@ import { UserAddress } from "./page3/user_address"
 import { FileUpload } from "./page3/file_upload"
 import { MultiFileUpload } from "./page3/multi_file_upload"
 import { GeoLocation } from "./page3/geoLocation"
+import { useNavigate } from "react-router-dom"
 
 
 
@@ -30,6 +31,7 @@ function ProgressBar1() {
     const [page,setPage] = useState(0)
     const FormPages = ["User Info", "User Address", "File Upload1","File Upload2","Geo Location"];
 
+    const navigate = useNavigate()
    
    
 
@@ -95,18 +97,20 @@ function ProgressBar1() {
             }
             else{
                 console.log(data)
-                let d = data
-                let result = await fetch("http://localhost:3000/users/",
-                                    {
-                                        method : 'POST',
-                                        headers : {
-                                            "Content-Type" : "application/json",
-                                            "Accept" : "application/json"
-                                        },
-                                        body : JSON.stringify(data)
-                                    })
-                result = await result.json()
-                console.log(result)
+                
+                await fetch("http://localhost:3000/users/",
+                    {
+                        method : 'POST',
+                        headers : {
+                                    "Content-Type" : "application/json",
+                                    "Accept" : "application/json"
+                                    },
+                        body : JSON.stringify(data)
+                    })
+                    alert("Successfully submitted the data")
+                    navigate('/submit_form')
+
+                
             }
 
     }

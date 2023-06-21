@@ -1,7 +1,7 @@
 
 
 import React, {useEffect, useState} from "react";
-import { Link , useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify'
 import "./login.css"
 
@@ -30,7 +30,6 @@ const Login = () => {
     const handleLogin = (e) => {
 
         e.preventDefault()
-        let d = {username,password}
         if(validate()){
             console.log(data.username)
             fetch("http://localhost:3000/admin/"+username).then((res) => {
@@ -84,7 +83,7 @@ const Login = () => {
                 <div className="cover">
                 
                     <h1>Login</h1>
-                    <input type="email" placeholder="username" name="username" value={data.username} onChange={changeHandler} autoFocus/>
+                    <input type="email" placeholder="email" name="username" value={data.username} onChange={changeHandler} autoFocus/>
                     <input type="password" placeholder="password" name="password" value={data.password} onChange={changeHandler}/>
 
                     <div className="forgot-password" onClick={handleClick}> Forgot Password?</div>
