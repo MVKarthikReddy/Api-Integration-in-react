@@ -1,10 +1,54 @@
 {
-  "user": [
+  "admin": [
     {
-      "id": "levitation@levitation.in",
-      "email": "levitation@levitation.in",
-      "password": "levitation"
+      "username": [
+        "levitation@levitation.in"
+      ],
+      "password": [
+        "levitation"
+      ],
+      "id": "levitation@levitation.in"
+    }
+  ],
+  "users": [
+    {
+      "username": [
+        "Karhtik Reddy"
+      ],
+      "email": [
+        "karthikmedagam@gmail.com"
+      ],
+      "phoneNum": "+912345678901",
+      "address1": [
+        "Ashok Nagar 3rd line, Laksmipuram main road"
+      ],
+      "address2": [
+        "Guntur"
+      ],
+      "city": [
+        "Guntur"
+      ],
+      "state": [
+        "Andhra Pradesh"
+      ],
+      "pincode": [
+        "522007"
+      ],
+      "country": [
+        "India"
+      ],
+      "file": {
+        "0": {}
+      },
+      "files": [
+        {},
+        {}
+      ],
+      "location": {
+        "latitude": 16.317188688740096,
+        "longitude": 80.43173067494645
+      },
+      "id": 1
     }
   ]
-  
 }
