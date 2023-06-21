@@ -27,9 +27,7 @@ function ProgressBar1() {
         files : "",
         location : "",
     })
-    const [progress,setProgress] = useState(0)
     const [page,setPage] = useState(0)
-    const [but,setBut] = useState("Next")
     const FormPages = ["User Info", "User Address", "File Upload1","File Upload2","Geo Location"];
 
    
@@ -40,7 +38,6 @@ function ProgressBar1() {
         
             
             
-            // console.log("User details" + inputData)
             
             
             if(page===0)
@@ -99,12 +96,6 @@ function ProgressBar1() {
             else{
                 console.log(data)
             }
-            
-            return (
-
-                <div> <h2>Click Submit to complete the process</h2></div>
-            )
-        
 
     }
 
@@ -118,10 +109,10 @@ function ProgressBar1() {
                     <div className="container">
 
                         <div className="progress-bar">
-                            <div className="progress-fill" style={{width:`${progress}%`,backgroundColor:"rgb(79, 195, 241)"}}></div>
+                            <div className="progress-fill" style={{ width: page === 0 ? "20%" : page == 1 ? "40%" : page == 2? "60%" : page == 3 ? "80%" : "100%" }}></div>
                         </div>
 
-                        <div className="progress-label">{progress}%</div>
+                        
                     
                                 <div className="pages">
                                     <h3>Fill the form</h3>
@@ -130,42 +121,22 @@ function ProgressBar1() {
                             
 
                         <div >
-                            <button className="buttons" id="previous" disabled={page == 0} onClick={() => { console.log("previous : "+page)
-                                                                                                if(progress<=100)
-                                                                                                {
-                                                                                                    setBut("Next")
-                                                                                                }
-                                                                                                
-                                                                                                if(progress>20)
-                                                                                                {
-                                                                                                    setPage(page-1);
-                                                                                                    setProgress(progress-20)
-                                                                                                }
-                                                                                            }}>Previous</button>
+                            <button className="buttons" id="previous" disabled={page == 0} onClick={() => {
+                                                                                                            setPage((currPage) => currPage - 1);
+                                                                                                        }}
+                                                                                                                
+                                                                                                                   > Prev</button>
 
-                            <button className="buttons" id="next" onClick={() => {  console.log("Next : "+page)
-                                                                                    if (page === FormPages.length-1 || progress>=80) {
-                                                                                        setBut("Submit");
-                                                                                        if(progress<100)
-                                                                                        {
-                                                                                            
-                                                                                            setProgress(progress+20)
-                                                                                        }
-                                                                                        if(progress==100)
-                                                                                        {
-                                                                                            
-                                                                                            submitHandler();
-                                                                                        }
-
+                            <button className="buttons" id="next"  onClick={() => {
+                                                                                    if (page === FormPages.length - 1) {
+                                                                                        submitHandler()
+                                                                                        console.log(data);
                                                                                     } else {
-                                                                                            if(progress<100)
-                                                                                            {
-                                                                                                setPage(page+1);
-                                                                                                setProgress(progress+20);
-                                                                                            }
-
-                                                                                            
-                                                                                    }}}>{but}</button>
+                                                                                        setPage((currPage) => currPage + 1);
+                                                                                    }
+                                                                                    }}
+                                                                                >
+                                                                                    {page === FormPages.length - 1 ? "Submit" : "Next"}</button>
                         </div>
                         
                         

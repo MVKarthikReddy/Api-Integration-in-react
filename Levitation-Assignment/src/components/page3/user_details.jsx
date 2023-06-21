@@ -42,7 +42,7 @@ export function UserDetails(props)
 
                         <div>
                             <label>Contact<span className='required'>*</span></label><br></br>
-                            <div><PhoneInput  placeholder="Enter phone Num" name="contactNum" value={props.data.phoneNum} onChange={(e) => {props.setData({...props.data,phoneNum:e})}}/></div>
+                            <div><PhoneInput  placeholder="Enter phone Num" name="contactNum" value={props.data.phoneNum} onChange={(e) => {props.setData({...props.data,phoneNum:"+"+e})}}/></div>
                         </div>
                         
                     </div>
