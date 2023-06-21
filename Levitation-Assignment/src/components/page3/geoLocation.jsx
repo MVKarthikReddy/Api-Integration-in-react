@@ -9,7 +9,7 @@ export function GeoLocation(props) {
 
   const getLocationJs = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position);
+      // console.log(position);
       const { latitude, longitude } = position.coords;
       setCurrLocationJs({ latitude, longitude });
       props.setData({...props.data,location:{latitude,longitude}})

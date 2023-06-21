@@ -14,7 +14,7 @@ export function UserDetails(props)
 
     function changeHandle(e)
     {
-        console.log(props.data)
+        // console.log(props.data)
         props.setData({...props.data,
                     [e.target.name]:[e.target.value]
                     },

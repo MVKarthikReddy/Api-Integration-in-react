@@ -27,7 +27,7 @@ export function MultiFileUpload(props) {
         })
         if (!limitExceeded)
         {
-            console.log(uploaded)
+            // console.log(uploaded)
             setUploadedFiles(uploaded)
             props.setData({...props.data,files:uploaded})
             // console.log(props.data)

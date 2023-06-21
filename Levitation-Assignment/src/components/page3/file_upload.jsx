@@ -10,7 +10,7 @@ import propTypes from 'prop-types'
 
     const handleUploadFile = f => {
             setUploadedFile(f)
-            console.log(f)
+            // console.log(f)
             props.setData({...props.data,file:f})
             console.log(props.data)
     }
