@@ -30,17 +30,19 @@ const Login = () => {
     const handleLogin = (e) => {
 
         e.preventDefault()
+        console.log(data)
         if(validate()){
             console.log(data.username)
             fetch("http://localhost:3000/admin/"+username).then((res) => {
                 return res.json();
             }).then((resp) => {
-                console.log(resp)
+                
                 if (Object.keys(resp).length === 0) {
                     toast.error('Login failed, invalid credentials');
                 }
                 else {
-                    if (resp.password === password[0]) {
+                    // console.log(resp.password.toString()===password[0].toString())
+                    if (resp.password.toString()===password[0].toString()) {
                         toast.success('Success');
                         sessionStorage.setItem('username',username);
                         sessionStorage.setItem('userpass',resp.password);
